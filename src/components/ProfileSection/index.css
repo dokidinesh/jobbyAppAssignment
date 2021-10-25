@@ -1,0 +1,19 @@
+.profile-section {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/profile-bg.png');
+  width: 448px;
+  height: 250px;
+  background-size: cover;
+  padding: 20px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.name {
+  font-family: Roboto;
+  color: #6366f1;
+}
+
+.short-bio {
+  font-family: Roboto;
+  font-size: 20px;
+}

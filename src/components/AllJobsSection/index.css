@@ -1,0 +1,85 @@
+.all-jobs-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: #000000;
+}
+
+.mobile-search-input-container {
+  display: flex;
+  width: 90%;
+  margin: 20px;
+  border: 1px solid #64748b;
+  border-radius: 3px;
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-search-input-container {
+    display: none;
+  }
+}
+
+.desktop-search-input-container {
+  display: flex;
+  width: 90%;
+  margin: 20px;
+  border: 1px solid #64748b;
+  border-radius: 3px;
+}
+
+@media screen and (max-width: 767px) {
+  .desktop-search-input-container {
+    display: none;
+  }
+}
+
+.search-input {
+  font-family: Roboto;
+  flex-grow: 1;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: #ffffff;
+}
+
+.search-icon-button {
+  background-color: #272727;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #ffffff;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.separator {
+  min-width: 90%;
+  border: 1px solid #b6c5ff;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.jobs-list-container {
+  list-style: none;
+}
+
+@media screen and (min-width: 768px) {
+  .responsive-container {
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .profile-filters-container {
+    padding: 20px;
+  }
+}
+
+.failure-view {
+  color: #ffffff;
+}
