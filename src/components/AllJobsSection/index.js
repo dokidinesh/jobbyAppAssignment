@@ -57,8 +57,8 @@ class AllJobsSection extends Component {
     jobsList: [],
     apiStatus: apiStatusConstants.initial,
     searchInputValue: '',
-    employmentType: '',
-    activeSalaryRangeId: '',
+    activeEmploymentTypesList: [],
+    activeSalaryRangeId: salaryRangesList[0].salaryRangeId,
   }
 
   componentDidMount() {
@@ -69,9 +69,17 @@ class AllJobsSection extends Component {
     this.setState({apiStatus: apiStatusConstants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
 
-    const {employmentType, activeSalaryRangeId, searchInputValue} = this.state
+    const {
+      activeEmploymentTypesList,
+      activeSalaryRangeId,
+      searchInputValue,
+    } = this.state
 
-    const apiUrl = `https://apis.ccbp.in/jobs?employment_type=${employmentType}&minimum_package=${activeSalaryRangeId}&search=${searchInputValue}`
+    console.log(activeEmploymentTypesList)
+
+    const updatedActiveEmploymentTypeId = activeEmploymentTypesList.join(',')
+
+    const apiUrl = `https://apis.ccbp.in/jobs?employment_type=${updatedActiveEmploymentTypeId}&minimum_package=${activeSalaryRangeId}&search=${searchInputValue}`
     const options = {
       method: 'GET',
       headers: {
@@ -119,8 +127,17 @@ class AllJobsSection extends Component {
   }
 
   changeSalaryRange = activeSalaryRangeId => {
-    console.log(activeSalaryRangeId)
     this.setState({activeSalaryRangeId}, this.getJobsList)
+  }
+
+  changeEmploymentType = employmentTypeId => {
+    this.setState(prevState => {
+      const updatedActiveEmploymentTypesList = [
+        ...prevState.activeEmploymentTypesList,
+        employmentTypeId,
+      ]
+      return {activeEmploymentTypesList: updatedActiveEmploymentTypesList}
+    })
   }
 
   renderFailureView = () => (
@@ -138,7 +155,7 @@ class AllJobsSection extends Component {
   )
 
   renderAllJobs = () => {
-    const {jobsList, searchInputValue, activeSalaryRangeId} = this.state
+    const {jobsList, searchInputValue} = this.state
     const showJobsList = jobsList.length > 0
 
     return showJobsList ? (
@@ -168,7 +185,7 @@ class AllJobsSection extends Component {
               employmentTypesList={employmentTypesList}
               salaryRangesList={salaryRangesList}
               changeSalaryRange={this.changeSalaryRange}
-              activeSalaryRangeId={activeSalaryRangeId}
+              changeEmploymentType={this.changeEmploymentType}
             />
           </div>
           <div>

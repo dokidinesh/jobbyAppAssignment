@@ -5,9 +5,8 @@ const FiltersGroup = props => {
     const {salaryRangesList} = props
 
     return salaryRangesList.map(salaryRange => {
-      const {changeSalaryRange, activeSalaryRangeId} = props
-      const onClickSalaryRange = () =>
-        changeSalaryRange(salaryRange.salaryRangeId)
+      const {changeSalaryRange} = props
+      const onChangeSalaryRange = event => changeSalaryRange(event.target.value)
       return (
         <li key={salaryRange.salaryRangeId} className="list-item">
           <input
@@ -15,7 +14,8 @@ const FiltersGroup = props => {
             type="radio"
             id={salaryRange.salaryRangeId}
             name="salary range"
-            onClick={onClickSalaryRange}
+            onChange={onChangeSalaryRange}
+            value={salaryRange.salaryRangeId}
           />
           <label htmlFor={salaryRange.salaryRangeId}>{salaryRange.label}</label>
         </li>
@@ -34,10 +34,10 @@ const FiltersGroup = props => {
     const {employmentTypesList} = props
 
     return employmentTypesList.map(employmentType => {
-      const {changeEmploymentType, activeEmploymentTypeId} = props
+      const {changeEmploymentType} = props
 
-      const onClickEmploymentType = () =>
-        changeEmploymentType(employmentType.employmentTypeId)
+      const onClickEmploymentType = event =>
+        changeEmploymentType(event.target.value)
 
       return (
         <li key={employmentType.employmentTypeId} className="list-item">
@@ -46,6 +46,7 @@ const FiltersGroup = props => {
             type="checkbox"
             id={employmentType.employmentTypeId}
             onClick={onClickEmploymentType}
+            value={employmentType.employmentTypeId}
           />
           <label htmlFor={employmentType.employmentTypeId}>
             {employmentType.label}
