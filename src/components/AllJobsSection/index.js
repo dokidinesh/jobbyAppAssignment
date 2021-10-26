@@ -154,28 +154,74 @@ class AllJobsSection extends Component {
     </div>
   )
 
+  renderSearchInput = () => {
+    const {searchInputValue} = this.state
+
+    return (
+      <>
+        <input
+          className="search-input"
+          type="search"
+          placeholder="Search"
+          value={searchInputValue}
+          onChange={this.onChangeSearchInput}
+        />
+        <button
+          className="search-icon-button"
+          testid="searchButton"
+          type="button"
+          onClick={this.onEnterSearchInput}
+        >
+          <BsSearch />
+        </button>
+      </>
+    )
+  }
+
   renderAllJobs = () => {
-    const {jobsList, searchInputValue} = this.state
+    const {jobsList} = this.state
     const showJobsList = jobsList.length > 0
 
     return showJobsList ? (
+      <>
+        <ul className="jobs-list-container">
+          {jobsList.map(eachJob => (
+            <JobCard jobDetails={eachJob} key={eachJob.id} />
+          ))}
+        </ul>
+      </>
+    ) : (
+      <div>
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
+          alt="no jobs"
+        />
+        <h1>No Jobs Found</h1>
+        <p>We could not find any jobs. Try other filters.</p>
+      </div>
+    )
+  }
+
+  renderAllViews = () => {
+    const {apiStatus} = this.state
+
+    switch (apiStatus) {
+      case apiStatusConstants.success:
+        return this.renderAllJobs()
+      case apiStatusConstants.failure:
+        return this.renderFailureView()
+      case apiStatusConstants.inProgress:
+        return this.renderLoadingView()
+      default:
+        return null
+    }
+  }
+
+  render() {
+    return (
       <div className="all-jobs-section">
         <div className="mobile-search-input-container">
-          <input
-            className="search-input"
-            type="search"
-            placeholder="Search"
-            value={searchInputValue}
-            onChange={this.onChangeSearchInput}
-          />
-          <button
-            className="search-icon-button"
-            testid="searchButton"
-            type="button"
-            onClick={this.onEnterSearchInput}
-          >
-            <BsSearch />
-          </button>
+          {this.renderSearchInput()}
         </div>
         <div className="responsive-container">
           <div className="profile-filters-container">
@@ -190,54 +236,13 @@ class AllJobsSection extends Component {
           </div>
           <div>
             <div className="desktop-search-input-container">
-              <input
-                className="search-input"
-                type="search"
-                placeholder="Search"
-                onChange={this.onChangeSearchInput}
-              />
-              <button
-                className="search-icon-button"
-                testid="searchButton"
-                type="button"
-                onClick={this.onEnterSearchInput}
-              >
-                <BsSearch />
-              </button>
+              {this.renderSearchInput()}
             </div>
-            <ul className="jobs-list-container">
-              {jobsList.map(eachJob => (
-                <JobCard jobDetails={eachJob} key={eachJob.id} />
-              ))}
-            </ul>
+            {this.renderAllViews()}
           </div>
         </div>
       </div>
-    ) : (
-      <div>
-        <img
-          src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
-          alt="no jobs"
-        />
-        <h1>No Jobs Found</h1>
-        <p>We could not find any jobs. Try other filters.</p>
-      </div>
     )
-  }
-
-  render() {
-    const {apiStatus} = this.state
-
-    switch (apiStatus) {
-      case apiStatusConstants.success:
-        return this.renderAllJobs()
-      case apiStatusConstants.failure:
-        return this.renderFailureView()
-      case apiStatusConstants.inProgress:
-        return this.renderLoadingView()
-      default:
-        return null
-    }
   }
 }
 
