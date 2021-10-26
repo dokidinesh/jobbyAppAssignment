@@ -100,13 +100,14 @@ class JobItemDetails extends Component {
         <ul className="similar-jobs-list">
           {similarJobs.map(eachJob => (
             <li key={eachJob.id} className="similar-job-item">
-              <div className="logo-title-rating-container">
+              <div className="similar-job-logo-title-rating-container">
                 <img
+                  className="similar-company-logo"
                   src={eachJob.companyLogoUrl}
                   alt="similar job company logo"
                 />
-                <div className="title-rating-container">
-                  <h1 className="job-title">{eachJob.title}</h1>
+                <div className="similar-job-title-rating-container">
+                  <h1 className="title-heading">{eachJob.title}</h1>
                   <div className="rating-container">
                     <BsFillStarFill className="star-image" />
                     <p>{eachJob.rating}</p>
@@ -144,6 +145,7 @@ class JobItemDetails extends Component {
         <div className="responsive-details-container">
           <div className="logo-title-rating-container">
             <img
+              className="company-logo"
               src={jobDetails.companyLogoUrl}
               alt="job details company logo"
             />
@@ -213,7 +215,7 @@ class JobItemDetails extends Component {
   }
 
   renderLoadingView = () => (
-    <div testid="loader" className="products-loader-container">
+    <div testid="loader" className="job-details-loader-container">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )

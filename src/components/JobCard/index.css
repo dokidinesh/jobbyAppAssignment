@@ -1,10 +1,15 @@
 .job-card-container {
   background-color: #272727;
-  width: 90%;
+  max-width: 95%;
   padding: 20px;
   border-radius: 20px;
   text-decoration: none;
   margin-bottom: 20px;
+}
+
+.company-logo {
+  width: 100px;
+  height: 100px;
 }
 
 .link-item {
@@ -14,6 +19,7 @@
 .logo-title-rating-container {
   display: flex;
   text-decoration: none;
+  align-items: center;
 }
 
 .title-rating-container {

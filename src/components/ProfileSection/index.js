@@ -75,7 +75,11 @@ class ProfileSection extends Component {
 
   renderFailureView = () => (
     <div>
-      <button type="button" onClick={this.onClickRetry}>
+      <button
+        className="retry-button"
+        type="button"
+        onClick={this.onClickRetry}
+      >
         Retry
       </button>
     </div>

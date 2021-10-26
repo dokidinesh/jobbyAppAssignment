@@ -65,6 +65,7 @@ const FiltersGroup = props => {
 
   return (
     <div className="filters-group-container">
+      <hr className="separator" />
       {renderSalaryRangeFilters()}
 
       <hr className="separator" />

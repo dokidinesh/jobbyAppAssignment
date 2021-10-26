@@ -109,7 +109,7 @@ class AllJobsSection extends Component {
   }
 
   renderLoadingView = () => (
-    <div className="products-loader-container" testid="loader">
+    <div className="jobs-loader-container" testid="loader">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )
@@ -141,14 +141,20 @@ class AllJobsSection extends Component {
   }
 
   renderFailureView = () => (
-    <div className="failure-view">
+    <div className="jobs-error-view-container">
       <img
         src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
         alt="failure view"
       />
-      <h1>Oops! Something Went Wrong</h1>
-      <p>We cannot seem to find the page you are looking for.</p>
-      <button type="button" onClick={this.onClickRetry}>
+      <h1 className="failure-view-heading">Oops! Something Went Wrong</h1>
+      <p className="failure-view-description">
+        We cannot seem to find the page you are looking for.
+      </p>
+      <button
+        className="retry-button"
+        type="button"
+        onClick={this.onClickRetry}
+      >
         Retry
       </button>
     </div>
@@ -178,7 +184,7 @@ class AllJobsSection extends Component {
     )
   }
 
-  renderAllJobs = () => {
+  renderJobsListView = () => {
     const {jobsList} = this.state
     const showJobsList = jobsList.length > 0
 
@@ -202,12 +208,12 @@ class AllJobsSection extends Component {
     )
   }
 
-  renderAllViews = () => {
+  renderAllJobsSection = () => {
     const {apiStatus} = this.state
 
     switch (apiStatus) {
       case apiStatusConstants.success:
-        return this.renderAllJobs()
+        return this.renderJobsListView()
       case apiStatusConstants.failure:
         return this.renderFailureView()
       case apiStatusConstants.inProgress:
@@ -226,7 +232,7 @@ class AllJobsSection extends Component {
         <div className="responsive-container">
           <div className="profile-filters-container">
             <ProfileSection />
-            <hr className="separator" />
+
             <FiltersGroup
               employmentTypesList={employmentTypesList}
               salaryRangesList={salaryRangesList}
@@ -234,11 +240,11 @@ class AllJobsSection extends Component {
               changeEmploymentType={this.changeEmploymentType}
             />
           </div>
-          <div>
+          <div className="jobs-container">
             <div className="desktop-search-input-container">
               {this.renderSearchInput()}
             </div>
-            {this.renderAllViews()}
+            {this.renderAllJobsSection()}
           </div>
         </div>
       </div>

@@ -109,3 +109,31 @@
     width: 35%;
   }
 }
+
+.job-details-loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.similar-company-logo {
+  width: 50px;
+  height: 50px;
+}
+
+.similar-job-logo-title-rating-container {
+  display: flex;
+  align-items: center;
+}
+
+.similar-job-title-rating-container {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title-heading {
+  font-size: 24px;
+}
